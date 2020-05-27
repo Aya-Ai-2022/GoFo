@@ -1,18 +1,26 @@
 import java.util.Vector;
 
 public class playground {
-    String playgroundName , playgroundLocation ,playgroundID , status;
-    double playgroubdSize , pricePerHour , cancellationPeriod;
+    String playgroundName , playgroundLocation ,playgroundID ;
+    double playgroundSize , pricePerHour , cancellationPeriod;
+    boolean status;
     Vector<time> playgroundHours = new Vector<time>();
 
-
-
+    public playground(){
+        playgroundName="";
+        playgroundLocation="";
+        playgroundID="";
+        status=true;
+        playgroundSize=1;
+        pricePerHour=0;
+        cancellationPeriod=0;
+    }
     public double getCancellationPeriod() {
         return cancellationPeriod;
     }
 
-    public double getPlaygroubdSize() {
-        return playgroubdSize;
+    public double getPlaygroundSize() {
+        return playgroundSize;
     }
 
     public double getPricePerHour() {
@@ -35,11 +43,11 @@ public class playground {
         return playgroundHours;
     }
 
-    public String getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
@@ -48,7 +56,7 @@ public class playground {
     }
 
     public void setPlaygroubdSize(double playgroubdSize) {
-        this.playgroubdSize = playgroubdSize;
+        this.playgroundSize = playgroubdSize;
     }
 
 
