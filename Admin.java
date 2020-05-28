@@ -25,7 +25,7 @@ public class Admin {
 	private  String[]account = {"adminGofo","@dminGoFO##"};
 	private boolean active = false;
 
-
+//
     public boolean checkEmailPassword()
     {
 
