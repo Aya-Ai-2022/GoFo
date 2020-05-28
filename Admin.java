@@ -12,8 +12,14 @@ import java.util.*;
 public class Admin {
 
 	//private Arraylist<playgroundowner>playgroundOwner;
-//	private Arraylist<playground>playgrounds;
+//	private Arraylist<playground>playgrounds;    
 	private String adminName;
+	private String adminPass;
+	private  String[]account = {"adminGofo","@dminGoFO##"};
+	private boolean active = false;
+
+//
+	
 	
 	public String getAdminName() {
 		return adminName;
@@ -21,11 +27,17 @@ public class Admin {
 	public void setAdminName(String adminName) {
 		this.adminName = adminName;
 	}
-	private String adminPass;
-	private  String[]account = {"adminGofo","@dminGoFO##"};
-	private boolean active = false;
+	public String getAdminPass() {
+		return this.adminPass;
+	}
 
-//
+	/**
+	 * 
+	 * @param adminPass
+	 */
+	public void SetAdminPass(String adminPass) {
+		this.adminPass = adminPass;
+	}
     public boolean checkEmailPassword()
     {
 
