@@ -1,0 +1,155 @@
+import java.util.Vector;
+import java.util.*; 
+///////////////////////////////////
+///////////////////////////////////
+///////////////////////////////////
+class playground{
+  
+  Vector<playground>validplaygrounds = new Vector<playground>();
+
+}
+class player {
+  Scanner read= new Scanner(System.in); 
+  Vector<player>allplayers = new Vector<player>();
+  Vector<player> team = new Vector<player>();  
+  Vector<playground>bookedplayground = new Vector<playground>();
+  
+  Vector<String> inviation = new Vector<String>();
+  ///////////////////////////////////
+  ///////////////////////////////////
+  ///////////////////////////////////
+    public void setinviation (String p){
+        inviation=p;
+    }
+    public String getinviation(){
+        return  inviation;
+    }
+
+  ///////////////////////////////////
+  ///////////////////////////////////
+  ///////////////////////////////////
+  public Vector<playground> getvalidPlaygroundVector() {
+    for(int i=0;i<=validplaygrounds.capacity();i++){
+        return validplaygrounds(i).getPlaygroundName();
+      or
+        return validplaygrounds(i).getstring();
+      //getstring is a function to out put deatails of a certainplayground
+      //or we can view only names of those playgrounds
+    }
+  }
+  ///////////////////////////////////
+  ///////////////////////////////////
+  ///////////////////////////////////
+  public void playgroundbooking(){
+    System.out.println("here is the valid playgrounds");
+    getvalidPlaygroundVector();
+    System.out.println("enter number of the choosen playground");
+    int choice1=read.nextInt();
+    System.out.println(validplaygrounds(choice1).getstring());
+    System.out.println("do you want to confirm your booking?");
+    System.out.println("1 for yes _ 0 for no");
+    int choice2=read.nextInt();
+    if (choice2==1){
+      validplaygrounds(choice2).setStatus(true);
+     bookedplayground.add(validplaygrounds(choice2));
+    }
+    else
+    {validplaygrounds(choice2).setStatus(false);
+    }                   
+    System.out.println("playground have been booked");
+  }
+  ///////////////////////////////////
+  ///////////////////////////////////
+  ///////////////////////////////////   
+  public void addplayertoateam(){
+    
+    //before we add some one we need to creat a vector which contain all the players 
+    
+    //to check for the informations entered above whether it is true or not
+    //checkplayers function which handle this.
+    System.out.println("enter id of the player to be added in a team");
+    again:
+    int choice3=read.nextInt();
+    /////////////////////////////////
+    // this function should be in admin class but i will over ride it here
+    checkplayers(){  
+      int useless=0;
+      for(int i=0;i<=allplayers.capacity();i++){
+        if(choice3==allplayers.getid()){
+         useless=1; 
+          break;
+        }
+        }
+      if(useless==0){
+        System.out.println("invalid id");
+        System.out.println("type it again");
+        break again;
+        //this a methode i know which is similer to (goto) in c++
+        //it jump back to a certain place in a code if a certain condition occured
+      }
+         };
+    ///////////////////////////////////
+    
+    System.out.println("do you want to confirm this step?");
+    System.out.println("1 for yes _ 0 for no");
+    int choice4=read.nextInt();
+    if (choice4==1){
+      team.add(allplayers(choice3));
+    }
+    else
+    {
+     System.out.println("canceled"); 
+    }          
+  }
+  ///////////////////////////////////
+  ///////////////////////////////////
+  ///////////////////////////////////
+  public void inviteplayer(){
+    System.out.println("enter id of the player to be invited in a team");
+    again2:
+    
+    //i override it again :D 
+    checkplayers(){  
+      int useless=0;
+      int indexoftheplayer=0;
+      for(int i=0;i<=team.capacity();i++){
+        if(choice3==team.getid()){
+         useless=1; 
+          indexoftheplayer=i;
+          break;
+        }
+        }
+      if(useless==0){
+        System.out.println("invalid id");
+        System.out.println("type it again");
+        break again2;
+        //this a methode i know which is similer to (goto) in c++
+        //it jump back to a certain place in a code if a certain condition occured
+      }
+      //each player should have a string vector or array which act like a mail box to recieve invitaions from other players 
+      //i should loop in the team vector to find the player whose id given by the user
+      //that i will take it from the function checkplayer above
+      
+      team(indexoftheplayer).setinviation("i want youto join my team blah blah blah");  
+         };
+  }
+  ///////////////////////////////////
+  ///////////////////////////////////
+  ///////////////////////////////////
+  public void cancelbooking(){
+    System.out.println("this is your booked playgrounds");
+    for(int i=0;i<=bookedplayground.capacity();i++){
+       System.out.println(bookedplayground(i).getPlaygroundid());
+       return bookedplayground(i).getPlaygroundName();
+    }
+    System.out.println("enter id of the booking wanted to be canceled");
+    int choice6=read.nextInt();
+    System.out.println("do you want to cancel the booking");
+    System.out.println("1 for yes _ 0 for no");
+    int choice7=read.nextInt();
+    if (choice7==1){
+      bookedplayground.remove(bookedplayground(choice6));
+      System.out.println("canceled");
+    }      
+  }
+}
