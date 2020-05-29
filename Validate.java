@@ -97,7 +97,7 @@ public final class Validate {
 		return false;
 	}
 
-	public static boolean ValidatePlayer(User user) {
+	public static boolean ValidateUser(User user) {
 		if (Validate.name(user.getName())) {
 			if (Validate.username(user.getUserName())) {
 				if (Validate.email(user.getEmail())) {
@@ -132,7 +132,7 @@ public final class Validate {
 		
 		User user = new User("01005050140", "aaaaagoogk.nit", "mk12@#SSjj11", "ggg hh", "jjjjj");
 		Validate v1 = new Validate();
-		System.out.println(ValidatePlayer(user));
+		System.out.println(ValidateUser(user));
 		System.out.println(v1.getError());
 
 		// sample test
