@@ -1,13 +1,12 @@
 public class time {
     int hour , minute ;
     boolean period;
-    
+
     public time(){
         hour=0;
         minute=0;
         period=false;
     }
-    
     public void setHour(int h){
         hour=h;
     }
