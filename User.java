@@ -1,144 +1,193 @@
-
-package GOFO;
-
-import java.util.ArrayList;
-import java.util.Scanner;
-import GOFO.Validate;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  * @author
  *
  */
-enum role {
 
-	PLAYER, PLAYGROUNDOWNER
-}
 
 public class User {
-// This take player object and playgroundowner object
-	private ArrayList<User> players;
-	private ArrayList<User> playgroundowners;
+    private String userRole;
+    private String phone;
+    private String email;
+    private String password;
+    private String name;
+    private String userName;
+    public int id; // unique id for each user
+    private String errorLogIn;
 
-	// private String passwor;
-	static role userRole;
+    public User() {
+    }
 
-	private String phone;
-	private String email;
-	private String password;
-	private String name;
-	private String userName;
-	public int id; // unique id for each user
-	public static int countID = 1;
-	private String errorLogIn;
+    public User(String phone, String email, String password, String name, String userName ,String userRole) {
+        super();
+        this.phone = phone;
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.userName = userName;
+        this.userRole =userRole;
+    }
 
-	public String getErrorLogIn() {
-		return errorLogIn;
-	}
 
-	public void setErrorLogIn(String errorLogIn) {
-		this.errorLogIn = errorLogIn;
-	}
+    public String getErrorLogIn() {
+        return errorLogIn;
+    }
 
-	public static String input;
+    public void setErrorLogIn(String errorLogIn) {
+        this.errorLogIn = errorLogIn;
+    }
 
-	public String getPhone() {
-		return phone;
-	}
+    public String getPhone() {
+        return phone;
+    }
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public String getUserName() {
-		return userName;
-	}
+    public String getUserName() {
+        return userName;
+    }
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public User() {
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void register(User userReg) {
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-		if ((Validate.ValidateUser(userReg)) && (userReg.userRole.equals(role.PLAYER))) {
-			countID++;
-			userReg.id = countID;
-			players.add(userReg);
-		} else if ((Validate.ValidateUser(userReg)) && (userReg.userRole.equals(role.PLAYGROUNDOWNER))) {
-			countID++;
-			userReg.id = countID;
-			playgroundowners.add(userReg);
-		}
-	}
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
+    }
 
-	public void login(String nam, String pass) {
-		/*
-		 * User userlog=new User();
-		 * if(nam.equals(players.equals(userlog.userName))&&(pass.equals(players.equals(
-		 * userlog.password)))) players.showPlayerList(); else
-		 * if(nam.equals(playgroundowners.equals(userlog.userName))&&(pass.equals(
-		 * playgroundowners.equals(userlog.password))))
-		 * playgroundowners.showOwnerList(); else
-		 * userlog.setErrorLogIn("Error in log in Try again");
-		 */
+    public String getUserRole() {
+        return userRole;
+    }
 
-	}
+    public void enterName() throws IOException {
+        System.out.println("\nEnter your name : ");
+        Main.input = Main.reader.readLine();
+    }
+    public void enterUsername() throws IOException {
+        System.out.println("\nEnter your username : ");
+        Main.input = Main.reader.readLine();
+    }
+    public void enterEmail() throws IOException {
+        System.out.println("\nEnter your email : ");
+        Main.input = Main.reader.readLine();
+    }
+    public void enterPhone() throws IOException {
+        System.out.println("\nEnter your phone : ");
+        Main.input = Main.reader.readLine();
+    }
+    public void enterPassword() throws IOException {
+        System.out.println("\nEnter your password : ");
+        Main.input = Main.reader.readLine();
+    }
 
-	public String getEmail() {
-		return email;
-	}
 
-	public User(String phone, String email, String password, String name, String userName) {
-		super();
-		this.phone = phone;
-		this.email = email;
-		this.password = password;
-		this.name = name;
-		this.userName = userName;
-	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void register(String rol) throws IOException {
+        String n,e,u,pa,ph;
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		String input;
-		do {
-			System.out.println("Enter \"login\", \"register\", or \"exit\"");
-			input = scanner.nextLine();
-			if (input.equals("login")) {
-				// get login details
-			} else if (input.equals("register")) {
-				// get register details
-			} else if (input.equals("exit")) {
-				break; // exit the loop
-			} else {
-				// invalid input, tell them to try again
-			}
-		} while (true);
+        enterName();
+        while (!Validate.name(Main.input))
+        {
+            System.out.println("\n\t!!--Wrong input.");
+            enterName();
+        }
+        n=Main.input;
 
-	}
+        enterPhone();
+        while (!Validate.phone(Main.input))
+        {
+            System.out.println("\n\t!!--Wrong input.");
+            enterPhone();
+        }
+        ph=Main.input;
+        enterUsername();
+        while (!Validate.username(Main.input))
+        {
+            System.out.println("\n\t!!--Wrong input.");
+            enterUsername();
+        }
+        u=Main.input;
+
+        enterEmail();
+        while (!Validate.email(Main.input)) {
+            System.out.println("\n\t!!--Wrong input.");
+            enterEmail();
+        }
+        e=Main.input;
+
+        enterPassword();
+        while (!Validate.password(Main.input))
+        {
+            System.out.println("\n\t!!--Wrong input.");
+            enterPassword();
+        }
+        pa=Main.input;
+
+        if(rol.equals("player")){
+            player p =new player();
+            p.setEmail(e);
+            p.setName(n);
+            p.setPassword(pa);
+            p.setPhone(ph);
+            p.setUserName(u);
+            p.setUserRole("player");
+            Main.admin.addPlayer(p);
+        }
+        else{
+            playgroundOwner o = new playgroundOwner();
+            o.setEmail(e);
+            o.setName(n);
+            o.setPassword(pa);
+            o.setPhone(ph);
+            o.setUserName(u);
+            o.setUserRole("owner");
+            Main.admin.addPlaygroundOwner(o);
+
+        }
+
+    }
+
+    public void login() {
+        /*
+         * User userlog=new User();
+         * if(nam.equals(players.equals(userlog.userName))&&(pass.equals(players.equals(
+         * userlog.password)))) players.showPlayerList(); else
+         * if(nam.equals(playgroundowners.equals(userlog.userName))&&(pass.equals(
+         * playgroundowners.equals(userlog.password))))
+         * playgroundowners.showOwnerList(); else
+         * userlog.setErrorLogIn("Error in log in Try again");
+         */
+
+    }
+
 
 }
