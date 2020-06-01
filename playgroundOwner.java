@@ -3,16 +3,20 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Vector;
 
-public class playgroundOwner {
+
+public class playgroundOwner extends User {
     int Ewalletbalance;
     Vector<playground> playgroundVector = new Vector<playground>();
 
     public playgroundOwner(){
+        super();
         setEwalletbalance(0);
     }
 
     public void addPlayground(playground e){
+        Main.admin.approveplayground(e); //asking admin to approve the playground
         playgroundVector.add(e);
+
     }
 
     public void updatePlayground(playground e) throws IOException {
@@ -108,5 +112,13 @@ public class playgroundOwner {
 
     public void setEwalletbalance(int ewalletbalance) {
         Ewalletbalance = ewalletbalance;
+    }
+
+    @Override
+    public String toString() {
+        return "playgroundOwner : \n" + "name : " + getName()
+                +"username : "+ this.getUserName()+
+                "email : "  +this.getEmail()
+                +"phone : " +this.getPhone();
     }
 }
