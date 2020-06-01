@@ -1,7 +1,7 @@
 import java.util.Vector;
 
-public class playground {
-    String playgroundName , playgroundLocation ,playgroundID ;
+public class playground extends User {
+    String playgroundName , playgroundLocation ,playgroundID ,Owner;
     double playgroundSize , pricePerHour , cancellationPeriod;
     boolean status;
     Vector<time> playgroundHours = new Vector<time>();
@@ -31,6 +31,10 @@ public class playground {
         return playgroundID;
     }
 
+    public String getPlaygroundOwner() {
+        return Owner;
+    }
+
     public String getPlaygroundLocation() {
         return playgroundLocation;
     }
@@ -49,6 +53,10 @@ public class playground {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public void setPlaygroundOwner(String playgroundOwner) {
+        this.Owner = playgroundOwner;
     }
 
     public void setCancellationPeriod(double cancellationPeriod) {
