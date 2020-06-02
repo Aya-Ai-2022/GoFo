@@ -4,6 +4,8 @@ import java.io.InputStreamReader;
 import java.util.Date;
 import java.util.Date;
 import java.util.Properties;
+import java.util.Vector;
+import java.util.concurrent.ThreadLocalRandom;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -28,39 +30,67 @@ public class Main {
 
 
     public static void main(String[] args) throws IOException {
-        while (true){
-        System.out.println("Choose your role :\n1-Player.\n2-Playground Owner.\n3-Admin\nYour Choice : ");
-        input = reader.readLine();
-        int role= Integer.parseInt(input);
-        if (input.equals("1")||input.equals("2")) {
-            System.out.println("\n1-LOGIN.\n2-New user.\nYour Choice : ");
+
+        while (true) {
+            System.out.println("\n-----HELLO !! , let's GO FOOTBALL!-----\n");
+            System.out.println("Choose your role :\n1-Player.\n2-Playground Owner.\n3-Admin\n4-exit\nYour Choice : ");
             input = reader.readLine();
-            if(input.equals("1")){
+            int role = Integer.parseInt(input);
+            if (input.equals("1") || input.equals("2")) {
+                while (true) {
+                    System.out.println("\n1-LOGIN.\n2-New user.\n3-back\nYour Choice : ");
+                    input = reader.readLine();
+                    //login for existing account
+                    if (input.equals("1")) {
+                        User u = new User();
+                        if (role == 1) {
+                            while (!u.login("player")){
+                                System.out.println("\n--Wrong username or password.");
+                            }
+                            System.out.println("we're here;");
+
+                        } else if (role == 2) {
+                            u.login("owner");
+                        }
+
+                    }
+                    //register a new user
+                    else if (input.equals("2")) {
+                        User u = new User();
+                        if (role == 1) {
+                            u.register("player");
+                        } else if (role == 2) {
+                            u.register("owner");
+                        }
+
+                    }
+                    else if(input.equals("3")) break;
+                    else
+                        System.out.println("!!--Wrong input.");
+
+                }
+            }
+                else if (input.equals("3")) {
+                while (!admin.verifyAdmin()){
+                    System.out.println("\n--Wrong username or password.");
+                }
+                System.out.println("here");
+            }
+            else if (input.equals("4")) {
+                break;
+            }
+                else {
+                    System.out.println("!!--Wrong input.");
+                }
 
             }
-            else if(input.equals("2")){
-                User u = new User();
-                if(role==1){
-                    u.register("player");
-                }
-                else if(role==2){
-                    u.register("owner");
-                }
 
-            }
 
-        } else if (input.equals("3")) {
-
-        } else {
-            System.out.println("!!--Wrong input.");
         }
-    }
 
 
-    }
 
-
-    static void email (String email ,String nameR , String nameS){
+    static void sendEmail (String email ,String nameR , String nameS , String message){
                 final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
                 // Get a Properties object
                 Properties props = System.getProperties();
@@ -90,8 +120,8 @@ public class Main {
                     msg.setFrom(new InternetAddress("xxxx@gmail.com"));
                     msg.setRecipients(Message.RecipientType.TO,
                             InternetAddress.parse(email, false));
-                    msg.setSubject("GOFO INVITATION");
-                    msg.setText("Hello"+nameR+",\n"+nameS+" invites you to join the team!");
+                    msg.setSubject("GOFO APP");
+                    msg.setText("Hello"+nameR+",\n"+nameS+message);
                     msg.setSentDate(new Date());
                     Transport.send(msg);
                     Runtime.getRuntime().exec("cls");

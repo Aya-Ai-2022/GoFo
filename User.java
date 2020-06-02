@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author
@@ -152,42 +153,76 @@ public class User {
         }
         pa=Main.input;
 
-        if(rol.equals("player")){
-            player p =new player();
-            p.setEmail(e);
-            p.setName(n);
-            p.setPassword(pa);
-            p.setPhone(ph);
-            p.setUserName(u);
-            p.setUserRole("player");
-            Main.admin.addPlayer(p);
+        int randomNum = ThreadLocalRandom.current().nextInt(1111, 9998 + 1);
+        String message = ". we are happy to have you in our application!.\nhere's your code : "+randomNum;
+
+        Main.sendEmail(e,n,"we are GOFO team" , message);
+        System.out.println("\n\n\n\nEnter verification code to continue : ");
+        Main.input = Main.reader.readLine();
+        String code = Main.input;
+
+        while(!code.equals(String.valueOf(randomNum))) {
+             System.out.println("\n--Sorry code is wrong!");
+            System.out.println("\nEnter verification code to continue : ");
+            Main.input = Main.reader.readLine();
+            code = Main.input;
         }
-        else{
+
+            if (rol.equals("player")) {
+                player p = new player();
+                p.setEmail(e);
+                p.setName(n);
+                p.setPassword(pa);
+                p.setPhone(ph);
+                p.setUserName(u);
+                p.setUserRole("player");
+                Main.admin.addPlayer(p);
+            } else {
+                playgroundOwner o = new playgroundOwner();
+                o.setEmail(e);
+                o.setName(n);
+                o.setPassword(pa);
+                o.setPhone(ph);
+                o.setUserName(u);
+                o.setUserRole("owner");
+                Main.admin.addPlaygroundOwner(o);
+
+            }
+        }
+
+    public boolean login(String role) throws IOException {
+        String name, pass;
+        System.out.println("\nEnter your Username ");
+        Main.input = Main.reader.readLine();
+        name = Main.input;
+        System.out.println("\nEnter your password ");
+        Main.input = Main.reader.readLine();
+        pass = Main.input;
+
+        if (role.equals("player")) {
+            player p = new player();
+            p.setUserName(name);
+            p.setPassword(pass);
+            for (player i : Main.admin.getPlayers()) {
+                if (i.checkLogin(p)) return true;
+            }
+        }
+        else
+        {
             playgroundOwner o = new playgroundOwner();
-            o.setEmail(e);
-            o.setName(n);
-            o.setPassword(pa);
-            o.setPhone(ph);
-            o.setUserName(u);
-            o.setUserRole("owner");
-            Main.admin.addPlaygroundOwner(o);
+            o.setUserName(name);
+            o.setPassword(pass);
+            for (playgroundOwner i : Main.admin.getPlaygroundOwner()) {
+                if (i.checkLogin(o)) return true;
+
+
+            }
 
         }
-
+        return false;
     }
 
-    public void login() {
-        /*
-         * User userlog=new User();
-         * if(nam.equals(players.equals(userlog.userName))&&(pass.equals(players.equals(
-         * userlog.password)))) players.showPlayerList(); else
-         * if(nam.equals(playgroundowners.equals(userlog.userName))&&(pass.equals(
-         * playgroundowners.equals(userlog.password))))
-         * playgroundowners.showOwnerList(); else
-         * userlog.setErrorLogIn("Error in log in Try again");
-         */
 
-    }
 
 
 }
