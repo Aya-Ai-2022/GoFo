@@ -1,5 +1,6 @@
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -27,17 +28,22 @@ public class Admin {
         return adminPass;
     }
 
-   /* public boolean checkEmailPassword()
-    {
-
-        if ((adminName.equals(account[0])) && (adminPass.equals(account[1]))) return true;
+   public boolean verifyAdmin() throws IOException {
+        String name, pass;
+        System.out.println("\nEnter your Username ");
+        Main.input = Main.reader.readLine();
+        name = Main.input;
+        System.out.println("\nEnter your password ");
+        Main.input = Main.reader.readLine();
+        pass = Main.input;
+        if (name.equals(adminName)&&pass.equals(adminPass)) return true;
         else return false;
-    }*/
+    }
 
     public void approveplayground(playground e) {
      //check info if it's true
      //approve it
-     //let playground owner add it
+     //let playground owner add it & sending him notification
     }
 
     public void suspendplayground(playground e) {
@@ -64,4 +70,15 @@ public class Admin {
         playgroundOwner.add(o);
     }
 
+    public Vector<player> getPlayers() {
+        return players;
+    }
+
+    public Vector<playground> getPlaygrounds() {
+        return playgrounds;
+    }
+
+    public Vector<playgroundOwner> getPlaygroundOwner() {
+        return playgroundOwner;
+    }
 }

@@ -121,4 +121,9 @@ public class playgroundOwner extends User {
                 "email : "  +this.getEmail()
                 +"phone : " +this.getPhone();
     }
+
+    public boolean checkLogin(playgroundOwner o) {
+        return this.getUserName().equals(o.getUserName())&&this.getPassword().equals(o.getPassword()) ;
+    }
+
 }
