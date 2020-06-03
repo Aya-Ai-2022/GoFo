@@ -19,7 +19,6 @@ import javax.mail.internet.MimeMessage;
 
 public class Main {
     public static Admin admin= new Admin();
-    public static Validate v1 = new Validate();
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     public static String input;
     public static int userID = 0;
