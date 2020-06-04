@@ -1,7 +1,6 @@
 
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Vector;
 
 /**
@@ -11,6 +10,8 @@ import java.util.Vector;
 public class Admin {
     private Vector<player> players=new Vector<player>();
     private Vector<playgroundOwner>playgroundOwner=new Vector<playgroundOwner>();
+
+    private Vector<User> users=new Vector<>();
 	private Vector<playground>playgrounds=new Vector<playground>();
     private String adminName;
     private String adminPass;
@@ -28,15 +29,8 @@ public class Admin {
         return adminPass;
     }
 
-   public boolean verifyAdmin() throws IOException {
-        String name, pass;
-        System.out.println("\nEnter your Username ");
-        Main.input = Main.reader.readLine();
-        name = Main.input;
-        System.out.println("\nEnter your password ");
-        Main.input = Main.reader.readLine();
-        pass = Main.input;
-        if (name.equals(adminName)&&pass.equals(adminPass)) return true;
+   public boolean verifyAdmin(String n , String p) throws IOException {
+        if (n.equals(adminName)&&p.equals(adminPass)) return true;
         else return false;
     }
 
@@ -63,22 +57,51 @@ public class Admin {
     public void addPlayer(player p) {
         players.add(p);
     }
-    public void addPlayground(playground g) {
-        playgrounds.add(g);
-    }
+
     public void addPlaygroundOwner(playgroundOwner o) {
         playgroundOwner.add(o);
+
     }
 
     public Vector<player> getPlayers() {
         return players;
     }
 
+    public Vector<playgroundOwner> getPlaygroundOwner() {
+        return playgroundOwner;
+    }
+
     public Vector<playground> getPlaygrounds() {
         return playgrounds;
     }
 
-    public Vector<playgroundOwner> getPlaygroundOwner() {
-        return playgroundOwner;
+    public void addPlayground(playground g) {
+        playgrounds.add(g);
     }
+
+    public Vector<User> getUsers() {
+        return users;
+    }
+
+    public void addUsers(User u) {
+        users.add(u);
+    }
+
+    public player findPlayer(int id){
+        for(player p : players){
+            if (p.getID()==id) return p;
+        }
+        return null;
+
+    }
+
+    public playgroundOwner findOwner(int id){
+       for(playgroundOwner o : playgroundOwner){
+            if (o.getID()==id) return o;
+        }
+        return null;
+    }
+
+
+
 }

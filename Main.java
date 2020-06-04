@@ -18,75 +18,107 @@ import javax.mail.internet.MimeMessage;
 
 
 public class Main {
-    public static Admin admin= new Admin();
+    public static Admin admin = new Admin();
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     public static String input;
-    public static int userID = 0;
+    public static int userID = 1;
     public static int playgroundID = 0;
     public static int bookingID = 0;
-
-
 
 
     public static void main(String[] args) throws IOException {
 
         while (true) {
             System.out.println("\n-----HELLO !! , let's GO FOOTBALL!-----\n");
-            System.out.println("Choose your role :\n1-Player.\n2-Playground Owner.\n3-Admin\n4-exit\nYour Choice : ");
+            System.out.println("\n1-LOGIN.\n2-Sign up.\n3-Exit\nYour Choice : ");
             input = reader.readLine();
-            int role = Integer.parseInt(input);
-            if (input.equals("1") || input.equals("2")) {
+            //login for existing account
+            if (input.equals("1")) {
+                User u = new User();
+                int id=0;
                 while (true) {
-                    System.out.println("\n1-LOGIN.\n2-New user.\n3-back\nYour Choice : ");
-                    input = reader.readLine();
-                    //login for existing account
+                    String name, pass;
+                    System.out.println("\nEnter your Username ");
+                    Main.input = Main.reader.readLine();
+                    name = Main.input;
+                    System.out.println("\nEnter your password ");
+                    Main.input = Main.reader.readLine();
+                    pass = Main.input;
+                    id = u.login(name, pass);
+                    if (id == 0) {
+                        if (admin.verifyAdmin(name, pass)) {
+                            break;
+                        }
+                    } else {
+                        break;
+                    }
+                    System.out.println("\n!!--Wrong email or password.");
+
+                }
+
+                if(id!=0){
+                    player p =new player();
+                    playgroundOwner o =new playgroundOwner();
+                    p=admin.findPlayer(id);
+                    if(p==null){
+                        o=admin.findOwner(id);
+                        ownerMenu(o);
+                    }
+                    else{
+                       playerMenu(p);
+                    }
+
+                }
+                else adminMenu(admin);
+
+
+            }
+
+
+            //register a new user
+            else if (input.equals("2")) {
+                while(true) {
+                    User u = new User();
+                    System.out.println("\nChoose your role :\n1-Player\n2-Playground owner ");
+                    Main.input = Main.reader.readLine();
                     if (input.equals("1")) {
-                        User u = new User();
-                        if (role == 1) {
-                            while (!u.login("player")){
-                                System.out.println("\n--Wrong username or password.");
-                            }
-                            System.out.println("we're here;");
-
-                        } else if (role == 2) {
-                            u.login("owner");
-                        }
-
-                    }
-                    //register a new user
-                    else if (input.equals("2")) {
-                        User u = new User();
-                        if (role == 1) {
-                            u.register("player");
-                        } else if (role == 2) {
-                            u.register("owner");
-                        }
-
-                    }
-                    else if(input.equals("3")) break;
-                    else
-                        System.out.println("!!--Wrong input.");
-
+                        u.register("player");
+                    } else if (input.equals("2")) {
+                        u.register("owner");
+                    } else System.out.println("!!--Wrong input.");
                 }
             }
-                else if (input.equals("3")) {
-                while (!admin.verifyAdmin()){
-                    System.out.println("\n--Wrong username or password.");
-                }
-                System.out.println("here");
-            }
-            else if (input.equals("4")) {
-                break;
-            }
-                else {
-                    System.out.println("!!--Wrong input.");
-                }
 
-            }
+            else if (input.equals("3")) break;
+            else
+                System.out.println("\n!!--Wrong input.");
 
 
         }
 
+
+
+        }
+
+
+
+    static void playerMenu(player p) throws IOException {
+        while(true){
+            System.out.println("Choose action :\n1-\n4-logout");
+            input =reader.readLine();
+
+            if(input.equals("4")) break;
+        }
+
+     }
+
+    static void ownerMenu(playgroundOwner o){
+
+    }
+
+    static void adminMenu(Admin a){
+
+    }
 
 
     static void sendEmail (String email ,String nameR , String nameS , String message){

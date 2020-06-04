@@ -7,10 +7,12 @@ class player extends User {
 
     public player(){
         super();
+        this.setID(Main.userID++);
+
     }
 
 
-    public void bookPlayground (playground e, time t){
+    public void bookPlayground (playground e, hour t){
         Booking b = new Booking();
         b.setPlaygroundBooked(e);
         bookings.add(b);

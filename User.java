@@ -16,7 +16,7 @@ public class User {
     private String password;
     private String name;
     private String userName;
-    public int id; // unique id for each user
+    private int ID; // unique id for each user
     private String errorLogIn;
 
     public User() {
@@ -83,6 +83,15 @@ public class User {
 
     public void setUserRole(String userRole) {
         this.userRole = userRole;
+    }
+
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getUserRole() {
@@ -177,6 +186,7 @@ public class User {
                 p.setUserName(u);
                 p.setUserRole("player");
                 Main.admin.addPlayer(p);
+                Main.admin.addUsers(p);
             } else {
                 playgroundOwner o = new playgroundOwner();
                 o.setEmail(e);
@@ -186,26 +196,41 @@ public class User {
                 o.setUserName(u);
                 o.setUserRole("owner");
                 Main.admin.addPlaygroundOwner(o);
+                Main.admin.addUsers(o);
 
             }
         }
 
-    public boolean login(String role) throws IOException {
-        String name, pass;
-        System.out.println("\nEnter your Username ");
-        Main.input = Main.reader.readLine();
-        name = Main.input;
-        System.out.println("\nEnter your password ");
-        Main.input = Main.reader.readLine();
-        pass = Main.input;
+    public int login(String n , String p) throws IOException {
+        int id=0;
+
+
+        player pl = new player();
+        pl.setUserName(n);
+        pl.setPassword(p);
+        for (player i : Main.admin.getPlayers()) {
+            if (i.checkLogin(pl)) {
+                return i.getID();
+            }
+        }
+
+        playgroundOwner o = new playgroundOwner();
+        o.setUserName(n);
+        o.setPassword(p);
+        for (playgroundOwner i : Main.admin.getPlaygroundOwner()) {
+            if (i.checkLogin(o)) {
+                return i.getID();
+            }
+
+        }
+        /*
+            public boolean checkLogin(player o) {
+        return this.getUserName().equals(o.getUserName())&&this.getPassword().equals(o.getPassword()) ;
+    }
+
 
         if (role.equals("player")) {
-            player p = new player();
-            p.setUserName(name);
-            p.setPassword(pass);
-            for (player i : Main.admin.getPlayers()) {
-                if (i.checkLogin(p)) return true;
-            }
+
         }
         else
         {
@@ -220,6 +245,10 @@ public class User {
 
         }
         return false;
+
+         */
+
+        return id;
     }
 
 

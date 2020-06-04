@@ -1,19 +1,22 @@
 import java.util.Vector;
 
-public class playground extends User {
-    String playgroundName , playgroundLocation ,playgroundID ,Owner;
+public class playground {
+    String playgroundName , playgroundArea ,Owner ;
     double playgroundSize , pricePerHour , cancellationPeriod;
     boolean status;
-    Vector<time> playgroundHours = new Vector<time>();
+    int playgroundID;
+    Vector<hour> playgroundHours = new Vector<hour>();
+   // Vector<time> playgroundDate = new Vector<time>();
+
 
     public playground(){
         playgroundName="";
-        playgroundLocation="";
-        playgroundID="";
+        playgroundArea ="";
         status=true;
         playgroundSize=1;
         pricePerHour=0;
         cancellationPeriod=0;
+        playgroundID=Main.playgroundID++;
     }
     public double getCancellationPeriod() {
         return cancellationPeriod;
@@ -27,23 +30,19 @@ public class playground extends User {
         return pricePerHour;
     }
 
-    public String getPlaygroundID() {
-        return playgroundID;
-    }
-
     public String getPlaygroundOwner() {
         return Owner;
     }
 
-    public String getPlaygroundLocation() {
-        return playgroundLocation;
+    public String getPlaygroundArea() {
+        return playgroundArea;
     }
 
     public String getPlaygroundName() {
         return playgroundName;
     }
 
-    public Vector<time> getPlaygroundHours() {
+    public Vector<hour> getPlaygroundHours() {
         return playgroundHours;
     }
 
@@ -67,13 +66,8 @@ public class playground extends User {
         this.playgroundSize = playgroubdSize;
     }
 
-
-    public void setPlaygroundID(String playgroundID) {
-        this.playgroundID = playgroundID;
-    }
-
-    public void setPlaygroundLocation(String playgroundLocation) {
-        this.playgroundLocation = playgroundLocation;
+    public void setPlaygroundArea(String playgroundArea) {
+        this.playgroundArea = playgroundArea;
     }
 
     public void setPlaygroundName(String playgroundName) {
@@ -84,7 +78,7 @@ public class playground extends User {
         this.pricePerHour = pricePerHour;
     }
 
-    public void addPlaygroundHours(time e) {
+    public void addPlaygroundHours(hour e) {
         playgroundHours.add(e);
     }
 }

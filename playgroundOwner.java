@@ -11,6 +11,7 @@ public class playgroundOwner extends User {
     public playgroundOwner(){
         super();
         setEwalletBalance(0);
+        this.setID(Main.userID++);
     }
 
     public void addPlayground(playground e){
@@ -77,7 +78,7 @@ public class playgroundOwner extends User {
             } else if (op == "5") {
                 System.out.println("Enter new location : ");
                 String n = reader.readLine();
-                e.setPlaygroundLocation(n);
+                e.setPlaygroundArea(n);
                 System.out.println("Great ! ,, playground location changed !");
 
 
@@ -99,6 +100,10 @@ public class playgroundOwner extends User {
             }
 
         }
+    }
+
+    public void getpaid(int amount){
+        EwalletBalance+=amount;
     }
 
 
