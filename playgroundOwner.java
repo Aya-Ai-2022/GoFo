@@ -5,12 +5,12 @@ import java.util.Vector;
 
 
 public class playgroundOwner extends User {
-    int Ewalletbalance;
+    int EwalletBalance;
     Vector<playground> playgroundVector = new Vector<playground>();
 
     public playgroundOwner(){
         super();
-        setEwalletbalance(0);
+        setEwalletBalance(0);
     }
 
     public void addPlayground(playground e){
@@ -106,12 +106,12 @@ public class playgroundOwner extends User {
         return playgroundVector;
     }
 
-    public int getEwalletbalance() {
-        return Ewalletbalance;
+    public int getEwalletBalance() {
+        return EwalletBalance;
     }
 
-    public void setEwalletbalance(int ewalletbalance) {
-        Ewalletbalance = ewalletbalance;
+    public void setEwalletBalance(int ewalletBalance) {
+        EwalletBalance = ewalletBalance;
     }
 
     @Override
