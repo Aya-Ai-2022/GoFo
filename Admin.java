@@ -10,8 +10,8 @@ import java.util.Vector;
 public class Admin {
     private Vector<player> players=new Vector<player>();
     private Vector<playgroundOwner>playgroundOwner=new Vector<playgroundOwner>();
-
     private Vector<User> users=new Vector<>();
+    private Vector <playground> toApprove=new Vector<>();
 	private Vector<playground>playgrounds=new Vector<playground>();
     private String adminName;
     private String adminPass;
@@ -34,10 +34,22 @@ public class Admin {
         else return false;
     }
 
-    public void approveplayground(playground e) {
-     //check info if it's true
-     //approve it
-     //let playground owner add it & sending him notification
+    public void requestApproval(playground e) {
+        toApprove.add(e);
+    }
+
+    public void approvePlayground(int index){
+        playgrounds.add(toApprove.get(index));
+        toApprove.remove(index);
+    }
+
+    public void getToApprove() {
+        int counter=0;
+        for(playground p : toApprove){
+            counter++;
+            System.out.println(counter+"-" +p);
+
+        }
     }
 
     public void suspendplayground(playground e) {
@@ -71,10 +83,14 @@ public class Admin {
         return playgroundOwner;
     }
 
-    public Vector<playground> getPlaygrounds() {
-        return playgrounds;
-    }
+    public void getPlaygrounds() {
+        int counter=0;
+        for(playground p : playgrounds){
+            counter++;
+            System.out.println(counter+"-" +p);
 
+        }
+    }
     public void addPlayground(playground g) {
         playgrounds.add(g);
     }

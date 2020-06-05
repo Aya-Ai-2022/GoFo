@@ -28,6 +28,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
+
         while (true) {
             System.out.println("\n-----HELLO !! , let's GO FOOTBALL!-----\n");
             System.out.println("\n1-LOGIN.\n2-Sign up.\n3-Exit\nYour Choice : ");
@@ -104,19 +105,82 @@ public class Main {
 
     static void playerMenu(player p) throws IOException {
         while(true){
-            System.out.println("Choose action :\n1-\n4-logout");
-            input =reader.readLine();
+            System.out.println("Choose action :\n1-Show available playgrounds.\n2-add teammate to your team.\n3-remove member from your team.\n4-logout");
+            input = reader.readLine();
+            if(input.equals("1")){
+                admin.getPlaygrounds();
+                //*don't forget : there's function called "contain" we can use ot for filtering by area .. google it
+            }
+            else if(input.equals("2")){
+                String n,e;
+                while(true) {
+                    System.out.println("Enter your teammate Email : ");
+                    e = reader.readLine();
+                    System.out.println("Enter your teammate name : ");
+                    n = reader.readLine();
+                    p.addmember(e,n);
+                    System.out.println("\nGREAT!! .. we sent him an Invitation!");
+                    System.out.println("\nDo you want to add another member?(y/n) : ");
+                    input=reader.readLine();
+                    if(input.equalsIgnoreCase("y")) continue;
+                    else if (input.equalsIgnoreCase("n")) break;
+                    else System.out.println("!!--Wrong input.");
 
-            if(input.equals("4")) break;
+                }
+            }
+            else if(input.equals("3")){
+                p.getTeamPlayers();
+                System.out.println("\nEnter team member number to remove :");
+                input=reader.readLine();
+                int index = Integer.parseInt(input)-1;
+                p.modifyTeam(index);
+                System.out.println("\nRemoved successfully!!");
+            }
+            else if(input.equals("4")) break;
+            else System.out.println("!!--Wrong input.");
         }
 
      }
 
-    static void ownerMenu(playgroundOwner o){
+    static void ownerMenu(playgroundOwner o) throws IOException {
+        while (true) {
+            System.out.println("Choose action :\n1-Add playground\n2-Create profile\n3-logout");
+            input = reader.readLine();
+            if(input.equals("1")){
+                o.addPlayground();
+                System.out.println("\nGREAT!! .. Playground added successfully.");
+            }
+            else if(input.equals("2")){
+                o.createProfile();
+                System.out.println("\nGREAT!! .. profile created successfully.");
 
+            }
+            else if(input.equals("3")) break;
+           else System.out.println("!!--Wrong input.");
+
+
+        }
     }
 
-    static void adminMenu(Admin a){
+    static void adminMenu(Admin a) throws IOException {
+        while(true){
+            System.out.println("Choose action :\n1-show playgrounds to be approved\n2-logout");
+            input =reader.readLine();
+
+            if(input.equals("1")){
+                System.out.println("\nEnter playground number to approve it :");
+                admin.getToApprove();
+                input=reader.readLine();
+                int index = Integer.parseInt(input)-1;
+                admin.approvePlayground(index);
+                System.out.println("\nRemoved successfully!!");
+
+            }
+            else if(input.equals("2")) break;
+            else System.out.println("!!--Wrong input.");
+
+
+        }
 
     }
 

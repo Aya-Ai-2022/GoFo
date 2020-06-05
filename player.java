@@ -28,6 +28,18 @@ class player extends User {
         Main.sendEmail(email,name,this.getName()," invites you to join the team!");
     }
 
+    public void modifyTeam(int index){
+        teamPlayers.remove(index);
+    }
+
+    public void getTeamPlayers(){
+        int counter=0;
+        for(team t : teamPlayers){
+            counter++;
+            System.out.println(counter+"-" +t);
+        }
+    }
+
     @Override
     public String toString() {
         return "player{" +

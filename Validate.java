@@ -36,9 +36,6 @@ public final class Validate {
      *
      */
     public static boolean email(String input) {
-        // if(!input.isEmpty() && input.contains("@") && input.contains(".")){
-        // return true;
-        // }
 
         if (!input.isEmpty() && input.matches("^[A-Za-z0-9+_.-]+@+[A-Za-z0-9.]+[.]+[a-z]+$")) {
             return true;
@@ -85,52 +82,6 @@ public final class Validate {
 
             // return true if all criteria are met. -kg
             return upper && lower && num;
-        }
-        return false;
-    }
-
-    public static boolean ValidateUser(player p) {
-        if (Validate.name(p.getName())) {
-            if (Validate.username(p.getUserName())) {
-                if (Validate.email(p.getEmail())) {
-                    if (Validate.phone(p.getPhone())) {
-
-                        return true;
-                    } else {
-                        setError("Please enter a valid phone number");
-
-                    }
-                } else {
-                    setError("Please enter a valid email");
-                }
-            } else {
-                setError("Please enter an userName");
-            }
-        } else {
-            setError("Please enter a  name");
-        }
-        return false;
-    }
-
-    public static boolean ValidateUser(playgroundOwner o) {
-        if (Validate.name(o.getName())) {
-            if (Validate.username(o.getUserName())) {
-                if (Validate.email(o.getEmail())) {
-                    if (Validate.phone(o.getPhone())) {
-
-                        return true;
-                    } else {
-                        setError("Please enter a valid phone number");
-
-                    }
-                } else {
-                    setError("Please enter a valid email");
-                }
-            } else {
-                setError("Please enter an userName");
-            }
-        } else {
-            setError("Please enter a  name");
         }
         return false;
     }
