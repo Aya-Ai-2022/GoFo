@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Vector;
+import java.util.concurrent.ThreadLocalRandom;
 
 
 public class playgroundOwner extends User {
@@ -15,24 +16,30 @@ public class playgroundOwner extends User {
     }
 
     public void addPlayground() throws IOException {
+
         playground e=new playground();
+        hour h = new hour();
         System.out.println("Enter playground name : ");
         Main.input = Main.reader.readLine();
         e.setPlaygroundName(Main.input);
         System.out.println("Enter price per hour : ");
         double n = Double.parseDouble(Main.reader.readLine());
         e.setPricePerHour(n);
+
         System.out.println("Enter available hour(Hour must be in range 1pm-12pm) : ");
         int t = Integer.parseInt(Main.reader.readLine());
         if(t>12||t<1) System.out.println("!!--Hour must be in range 1pm-12pm");
-        else e.addPlaygroundHours(t);
+
+        else{h.setHour(t);
+            e.addPlaygroundHours(h);}
         while(true){
             System.out.println("add another hour? (y/n) : ");
             Main.input=Main.reader.readLine();
             if(Main.input.equalsIgnoreCase("y")) {
                 t = Integer.parseInt(Main.reader.readLine());
                 if(t>12||t<1) System.out.println("!!--Hour must be in range 1pm-12pm");
-                else e.addPlaygroundHours(t);
+                else {h.setHour(t);
+                    e.addPlaygroundHours(h);}
             }
             else if(Main.input.equalsIgnoreCase("n")) break;
             else System.out.println("!!--Wrong input.");
@@ -61,10 +68,26 @@ public class playgroundOwner extends User {
         Main.input = Main.reader.readLine();
         this.setPhone(Main.input);
 
+        int randomNum = ThreadLocalRandom.current().nextInt(1111, 9998 + 1);
+
+        //Main.sendSMS();
+        System.out.println("\n\n\n\nEnter verification code to continue : ");
+        Main.input = Main.reader.readLine();
+        String code = Main.input;
+
+        while(!code.equals(String.valueOf(randomNum))) {
+            System.out.println("\n--Sorry code is wrong!");
+            System.out.println("\nEnter verification code to continue : ");
+            Main.input = Main.reader.readLine();
+            code = Main.input;
+        }
+
+
     }
 
     public void updatePlayground(playground e) throws IOException {
         String op;
+        /*
         while (true) {
             System.out.println("choose from menu\n1.change playground name.\n2.change playground price.\n3.add playground hours.");
             System.out.println("\n4.delete playground hour.\n5.change playground location.\n6.change playground size\n7.change playground cancellation period.\n8.back");
@@ -141,7 +164,7 @@ public class playgroundOwner extends User {
                 System.out.println("\t\n!!-wrong input . try again .\n\n");
             }
 
-        }
+        }*/
     }
 
     public void getpaid(int amount){

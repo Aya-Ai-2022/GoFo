@@ -5,7 +5,7 @@ public class playground {
     double playgroundSize , pricePerHour , cancellationPeriod;
     boolean status;
     int playgroundID ,ownerID;
-    Vector<Integer> playgroundHours = new Vector<Integer>();
+    Vector<hour> playgroundHours = new Vector<hour>();
    // Vector<time> playgroundDate = new Vector<time>();
 
 
@@ -42,7 +42,7 @@ public class playground {
         return playgroundName;
     }
 
-    public Vector<Integer> getPlaygroundHours() {
+    public Vector<hour> getPlaygroundHours() {
         return playgroundHours;
     }
 
@@ -74,7 +74,7 @@ public class playground {
         this.pricePerHour = pricePerHour;
     }
 
-    public void addPlaygroundHours(int e) {
+    public void addPlaygroundHours(hour e) {
         playgroundHours.add(e);
     }
 
@@ -101,6 +101,18 @@ public class playground {
     public void setOwner(String owner) {
         Owner = owner;
     }
+
+    public void getHour() {
+        for (hour h : playgroundHours) {
+           if (h.isAvailable())
+               System.out.println(h);
+        }
+    }
+
+    public  void book(int index){
+        playgroundHours.get(index).setAvailable(false);
+    }
+
 
     @Override
     public String toString() {
