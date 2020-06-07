@@ -103,14 +103,31 @@ public class playground {
     }
 
     public void getHour() {
+        int counter=1;
         for (hour h : playgroundHours) {
            if (h.isAvailable())
-               System.out.println(h);
+               System.out.println(counter + "-" + h);
+           else{
+               System.out.println(counter + "-" + h+"\tNOT AVAILABLE");
+           }
+           counter++;
         }
     }
 
     public  void book(int index){
         playgroundHours.get(index).setAvailable(false);
+    }
+
+
+    public boolean isAvailable(){
+        for(hour h : playgroundHours){
+            if(h.isAvailable()) return true;
+        }
+        return false;
+    }
+
+    public void addHour(hour h){
+        playgroundHours.add(h);
     }
 
 

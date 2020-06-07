@@ -2,8 +2,8 @@ import java.util.Vector;
 
 class player extends User {
     private Vector<team> teamPlayers=new Vector<team>();
-    private Vector <Booking> bookings;
-    private Vector <String> invitations;
+    private Vector <Booking> bookings=new Vector<>();
+    private Vector <String> invitations=new Vector<>();
 
     public player(){
         super();
@@ -15,6 +15,7 @@ class player extends User {
     public void bookPlayground (playground e, hour t){
         Booking b = new Booking();
         b.setPlaygroundBooked(e);
+        b.setHourBooked(t);
         bookings.add(b);
     }
 

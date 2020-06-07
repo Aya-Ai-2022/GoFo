@@ -2,10 +2,11 @@ public class Booking {
 
     private int id;
     private playground playgroundBooked;
+    private hour hourBooked;
 
 
-    public Booking() {
-        id=Main.bookingID++;
+    public Booking(){
+
     }
 
     public int getId() {
@@ -19,5 +20,13 @@ public class Booking {
 
     public void setPlaygroundBooked(playground playgroundBooked) {
         this.playgroundBooked = playgroundBooked;
+    }
+
+    public void setHourBooked(hour hourBooked) {
+        this.hourBooked = hourBooked;
+    }
+
+    public hour getHourBooked() {
+        return hourBooked;
     }
 }

@@ -1,10 +1,10 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.*;
 import java.util.Date;
-import java.util.Date;
-import java.util.Properties;
-import java.util.Vector;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -27,7 +27,6 @@ public class Main {
 
 
     public static void main(String[] args) throws IOException {
-
 
         while (true) {
             System.out.println("\n-----HELLO !! , let's GO FOOTBALL!-----\n");
@@ -84,8 +83,10 @@ public class Main {
                     Main.input = Main.reader.readLine();
                     if (input.equals("1")) {
                         u.register("player");
+                        break;
                     } else if (input.equals("2")) {
                         u.register("owner");
+                        break;
                     } else System.out.println("!!--Wrong input.");
                 }
             }
@@ -104,43 +105,129 @@ public class Main {
 
 
     static void playerMenu(player p) throws IOException {
-        while(true){
-            System.out.println("Choose action :\n1-Show available playgrounds.\n2-add teammate to your team.\n3-remove member from your team.\n4-logout");
+        while (true) {
+            System.out.println("Choose action :\n1-Show available playgrounds.\n2-add teammate to your team.\n3-remove member from your team.\n4-logout\nenter : ");
             input = reader.readLine();
-            if(input.equals("1")){
-                admin.getPlaygrounds();
-                //*don't forget : there's function called "contain" we can use ot for filtering by area .. google it
-            }
-            else if(input.equals("2")){
-                String n,e;
-                while(true) {
-                    System.out.println("Enter your teammate Email : ");
-                    e = reader.readLine();
-                    System.out.println("Enter your teammate name : ");
-                    n = reader.readLine();
-                    p.addmember(e,n);
-                    System.out.println("\nGREAT!! .. we sent him an Invitation!");
-                    System.out.println("\nDo you want to add another member?(y/n) : ");
-                    input=reader.readLine();
-                    if(input.equalsIgnoreCase("y")) continue;
-                    else if (input.equalsIgnoreCase("n")) break;
-                    else System.out.println("!!--Wrong input.");
+            Vector<playground> valid = new Vector<playground>();
+            if (input.equals("1")) {
+                System.out.println("1-show all.\n2- filter by.\nenter : ");
+                input = reader.readLine();
+                if (input.equals("1")) {
+                    valid = admin.getAll();
+                } else if (input.equals("2")) {
+                    while (true) {
+                        System.out.println("filter by :\n1-location.\n2-price range.\n3-Time range.\n4-available hours.\nenter : ");
+                        input = reader.readLine();
+                        if (input.equals("1")) {
+                            System.out.println("enter location : ");
+                            input = reader.readLine();
+                            valid = admin.filterArea(input);
+                            break;
+
+                        } else if (input.equals("2")) {
+                            System.out.println("enter min price : ");
+                            int min = Integer.parseInt(reader.readLine());
+                            System.out.println("enter max price : ");
+                            int max = Integer.parseInt(reader.readLine());
+                            valid = admin.filterPrice(min, max);
+                            break;
+
+
+                        } else if (input.equals("3")) {
+                            System.out.println("Search hour from : ");
+                            int min = Integer.parseInt(reader.readLine());
+                            System.out.println("to : ");
+                            int max = Integer.parseInt(reader.readLine());
+                            valid = admin.filterTime(min, max);
+                            break;
+                        } else if (input.equals("4")) {
+                            valid = admin.filterAvail();
+                            break;
+                        } else {
+                            System.out.println("invalid input.");
+                            continue;
+                        }
+                    }
+
+
 
                 }
+
+
+
+
+                if (!valid.isEmpty()) {
+                    int counter = 0;
+                    //displaying all pgs
+                    for (playground pg : valid) {
+                        counter++;
+                        System.out.println(counter + "-" + pg);
+                    }
+
+                    //choosing one
+                    System.out.println("choose playground  : ");
+                    int indexP = Integer.parseInt(reader.readLine()) - 1;
+                    while (indexP > valid.size()||indexP<0) {
+                        System.out.println("Wrong input..Choose again.");
+                        indexP = Integer.parseInt(reader.readLine()) - 1;
+                    }
+
+                    valid.get(indexP).getHour();
+                    System.out.println("choose hour  : ");
+                    int indexH = Integer.parseInt(reader.readLine()) - 1;
+
+                    while (indexH > valid.get(indexP).getPlaygroundHours().size()) {
+                        System.out.println("Wrong input..Choose again.");
+                        indexH = Integer.parseInt(reader.readLine()) - 1;
+                    }
+
+                    while (!valid.get(indexP).getPlaygroundHours().get(indexH).isAvailable()) {
+                        System.out.println("This hour is already booked.\nchoose again : ");
+                        indexH = Integer.parseInt(reader.readLine()) - 1;
+                    }
+
+
+                    valid.get(indexP).book(indexH);
+                    p.bookPlayground(valid.get(indexP), valid.get(indexP).getPlaygroundHours().get(indexH));
+                    System.out.println("Playground booked successfully.");
+                } else {
+                    System.out.println("There's no playgrounds !");
+                }
+
             }
-            else if(input.equals("3")){
-                p.getTeamPlayers();
-                System.out.println("\nEnter team member number to remove :");
-                input=reader.readLine();
-                int index = Integer.parseInt(input)-1;
-                p.modifyTeam(index);
-                System.out.println("\nRemoved successfully!!");
+
+
+
+
+                else if (input.equals("2")) {
+                    String n, e;
+                    while (true) {
+                        System.out.println("Enter your teammate Email : ");
+                        e = reader.readLine();
+                        System.out.println("Enter your teammate name : ");
+                        n = reader.readLine();
+                        p.addmember(e, n);
+                        System.out.println("\nGREAT!! .. we sent him an Invitation!");
+                        System.out.println("\nDo you want to add another member?(y/n) : ");
+                        input = reader.readLine();
+                        if (input.equalsIgnoreCase("y")) continue;
+                        else if (input.equalsIgnoreCase("n")) break;
+                        else System.out.println("!!--Wrong input.");
+
+                    }
+                } else if (input.equals("3")) {
+                    p.getTeamPlayers();
+                    System.out.println("\nEnter team member number to remove :");
+                    input = reader.readLine();
+                    int index = Integer.parseInt(input) - 1;
+                    p.modifyTeam(index);
+                    System.out.println("\nRemoved successfully!!");
+                } else if (input.equals("4")) break;
+                else System.out.println("!!--Wrong input.");
             }
-            else if(input.equals("4")) break;
-            else System.out.println("!!--Wrong input.");
+
         }
 
-     }
 
     static void ownerMenu(playgroundOwner o) throws IOException {
         while (true) {
@@ -195,11 +282,10 @@ public class Main {
                 props.setProperty("mail.smtp.port", "465");
                 props.setProperty("mail.smtp.socketFactory.port", "465");
                 props.put("mail.smtp.auth", "true");
-                props.put("mail.debug", "true");
                 props.put("mail.store.protocol", "pop3");
                 props.put("mail.transport.protocol", "smtp");
-                final String username = "xxx@gmail.com";//
-                final String password = "xxxxx";
+                final String username = "xxxxx@gmail.com";
+                final String password = "xxxxxx";
                 try {
                     Session session = Session.getDefaultInstance(props,
                             new Authenticator() {
@@ -212,18 +298,21 @@ public class Main {
                     Message msg = new MimeMessage(session);
 
                     // -- Set the FROM and TO fields --
-                    msg.setFrom(new InternetAddress("xxxx@gmail.com"));
+                    msg.setFrom(new InternetAddress("xxxxx@gmail.com"));
                     msg.setRecipients(Message.RecipientType.TO,
                             InternetAddress.parse(email, false));
                     msg.setSubject("GOFO APP");
-                    msg.setText("Hello"+nameR+",\n"+nameS+message);
+                    msg.setText("Hello "+nameR+",\n"+nameS+message);
                     msg.setSentDate(new Date());
                     Transport.send(msg);
-                    Runtime.getRuntime().exec("cls");
-                    System.out.println("Message sent.");
-                } catch (MessagingException | IOException e) {
+                } catch (MessagingException  e) {
                     System.out.println("Error, cause: " + e);
                 }
             }
+
+
+
+
+
 
 }

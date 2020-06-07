@@ -1,6 +1,9 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -140,21 +143,33 @@ public class User {
             enterPassword();
         }
         pa=Main.input;
+/*
+        Timer timer = new Timer();
+        TimerTask exitApp = new TimerTask() {
+            public void run() {
+                System.exit(0);
+            }
+        };
 
+            timer.schedule(exitApp, new Date(System.currentTimeMillis()+30*1000));
+
+*/
         int randomNum = ThreadLocalRandom.current().nextInt(1111, 9998 + 1);
         String message = ". we are happy to have you in our application!.\nhere's your code : "+randomNum;
-
         Main.sendEmail(e,n,"we are GOFO team" , message);
         System.out.println("\n\n\n\nEnter verification code to continue : ");
         Main.input = Main.reader.readLine();
         String code = Main.input;
-
         while(!code.equals(String.valueOf(randomNum))) {
+
              System.out.println("\n--Sorry code is wrong!");
             System.out.println("\nEnter verification code to continue : ");
             Main.input = Main.reader.readLine();
             code = Main.input;
+
         }
+
+
 
             if (rol.equals("player")) {
                 player p = new player();
@@ -200,30 +215,6 @@ public class User {
             }
 
         }
-        /*
-            public boolean checkLogin(player o) {
-        return this.getUserName().equals(o.getUserName())&&this.getPassword().equals(o.getPassword()) ;
-    }
-
-
-        if (role.equals("player")) {
-
-        }
-        else
-        {
-            playgroundOwner o = new playgroundOwner();
-            o.setUserName(name);
-            o.setPassword(pass);
-            for (playgroundOwner i : Main.admin.getPlaygroundOwner()) {
-                if (i.checkLogin(o)) return true;
-
-
-            }
-
-        }
-        return false;
-
-         */
 
         return id;
     }

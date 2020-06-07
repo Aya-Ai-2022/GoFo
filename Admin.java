@@ -8,29 +8,30 @@ import java.util.Vector;
  *
  */
 public class Admin {
-    private Vector<player> players=new Vector<player>();
-    private Vector<playgroundOwner>playgroundOwner=new Vector<playgroundOwner>();
-    private Vector<User> users=new Vector<>();
-    private Vector <playground> toApprove=new Vector<>();
-	private Vector<playground>playgrounds=new Vector<playground>();
+    private Vector<player> players = new Vector<player>();
+    private Vector<playgroundOwner> playgroundOwner = new Vector<playgroundOwner>();
+    private Vector<User> users = new Vector<>();
+    private Vector<playground> toApprove = new Vector<>();
+    private Vector<playground> playgrounds = new Vector<playground>();
     private String adminName;
     private String adminPass;
 
 
-    public Admin(){
-        adminName="adminGofo";
-        adminPass="@dminGoFO##";
+    public Admin() {
+        adminName = "adminGofo";
+        adminPass = "@dminGoFO##";
     }
 
     public String getAdminName() {
         return adminName;
     }
+
     public String getAdminPass() {
         return adminPass;
     }
 
-   public boolean verifyAdmin(String n , String p) throws IOException {
-        if (n.equals(adminName)&&p.equals(adminPass)) return true;
+    public boolean verifyAdmin(String n, String p) throws IOException {
+        if (n.equals(adminName) && p.equals(adminPass)) return true;
         else return false;
     }
 
@@ -38,16 +39,16 @@ public class Admin {
         toApprove.add(e);
     }
 
-    public void approvePlayground(int index){
+    public void approvePlayground(int index) {
         playgrounds.add(toApprove.get(index));
         toApprove.remove(index);
     }
 
     public void getToApprove() {
-        int counter=0;
-        for(playground p : toApprove){
+        int counter = 0;
+        for (playground p : toApprove) {
             counter++;
-            System.out.println(counter+"-" +p);
+            System.out.println(counter + "-" + p);
 
         }
     }
@@ -84,13 +85,18 @@ public class Admin {
     }
 
     public void getPlaygrounds() {
-        int counter=0;
-        for(playground p : playgrounds){
+        int counter = 0;
+        for (playground p : playgrounds) {
             counter++;
-            System.out.println(counter+"-" +p);
+            System.out.println(counter + "-" + p);
 
         }
     }
+
+    public Vector<playground> getAll(){
+        return playgrounds;
+    }
+
     public void addPlayground(playground g) {
         playgrounds.add(g);
     }
@@ -103,21 +109,69 @@ public class Admin {
         users.add(u);
     }
 
-    public player findPlayer(int id){
-        for(player p : players){
-            if (p.getID()==id) return p;
+    public player findPlayer(int id) {
+        for (player p : players) {
+            if (p.getID() == id) return p;
         }
         return null;
 
     }
 
-    public playgroundOwner findOwner(int id){
-       for(playgroundOwner o : playgroundOwner){
-            if (o.getID()==id) return o;
+    public playgroundOwner findOwner(int id) {
+        for (playgroundOwner o : playgroundOwner) {
+            if (o.getID() == id) return o;
         }
         return null;
     }
 
+
+    public Vector<playground> filterArea(String x) {
+        Vector<playground> valid = new Vector<>();
+        for (playground o : playgrounds) {
+                if (o.getPlaygroundArea().equals(x))
+                    valid.add(o);
+        }
+        return valid;
+
+    }
+
+    public Vector<playground> filterTime(int min ,int max) {
+        Vector<playground> valid = new Vector<>();
+        for (playground o : playgrounds) {
+            for(hour h : o.getPlaygroundHours()) {
+                if (h.getHour() >= min || h.getHour() <= max)
+                    valid.add(o);
+            }
+        }
+        return valid;
+
+    }
+
+
+    public Vector<playground> filterPrice(double min,double max) {
+        Vector<playground> valid = new Vector<>();
+        for (playground o : playgrounds) {
+
+                if (o.getPricePerHour()>=min||o.getPricePerHour()<=max)
+                    valid.add(o);
+        }
+        return valid;
+
+    }
+
+
+
+
+    public Vector<playground> filterAvail() {
+        Vector<playground> valid = new Vector<>();
+        for (playground o : playgrounds) {
+
+            if (o.isAvailable())
+                valid.add(o);
+        }
+        return valid;
+
+    }
 
 
 }

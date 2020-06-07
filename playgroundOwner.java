@@ -15,7 +15,9 @@ public class playgroundOwner extends User {
         this.setID(Main.userID++);
     }
 
-    public void addPlayground() throws IOException {
+
+
+        public void addPlayground() throws IOException {
 
         playground e=new playground();
         hour h = new hour();
@@ -87,7 +89,6 @@ public class playgroundOwner extends User {
 
     public void updatePlayground(playground e) throws IOException {
         String op;
-        /*
         while (true) {
             System.out.println("choose from menu\n1.change playground name.\n2.change playground price.\n3.add playground hours.");
             System.out.println("\n4.delete playground hour.\n5.change playground location.\n6.change playground size\n7.change playground cancellation period.\n8.back");
@@ -113,21 +114,7 @@ public class playgroundOwner extends User {
                 System.out.println("Enter hour : ");
                 n = Integer.parseInt(reader.readLine());
                 t.setHour(n);
-                System.out.println("Enter minutes : ");
-                n = Integer.parseInt(reader.readLine());
-                while (true) {
-                    System.out.println("Enter period (am/pm) : ");
-                    String s = reader.readLine();
-                    if (s.equals("am")) {
-                        t.setPeriod(false);
-                        break;
-                    } else if (s.equals("pm")) {
-                        t.setPeriod(true);
-                        break;
-                    } else System.out.println("\t\n!!-wrong input . try again .\n\n");
-                }
-
-                e.addPlaygroundHours(1);
+                e.addPlaygroundHours(t);
                 System.out.println("Great ! ,, playground hour added !");
 
             } else if (op == "4") {
@@ -164,7 +151,7 @@ public class playgroundOwner extends User {
                 System.out.println("\t\n!!-wrong input . try again .\n\n");
             }
 
-        }*/
+        }
     }
 
     public void getpaid(int amount){
