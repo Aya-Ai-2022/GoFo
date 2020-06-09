@@ -154,7 +154,7 @@ public class playgroundOwner extends User {
         }
     }
 
-    public void getpaid(int amount){
+    public void getpaid(double amount){
         EwalletBalance+=amount;
     }
 

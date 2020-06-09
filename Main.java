@@ -189,6 +189,13 @@ public class Main {
 
                     valid.get(indexP).book(indexH);
                     p.bookPlayground(valid.get(indexP), valid.get(indexP).getPlaygroundHours().get(indexH));
+
+                    for(playgroundOwner o : admin.getPlaygroundOwner()){
+                        if(valid.get(indexP).getOwnerID()==o.getID())
+                            o.getpaid(valid.get(indexP).getPricePerHour());
+
+                    }
+
                     System.out.println("Playground booked successfully.");
                 } else {
                     System.out.println("There's no playgrounds !");
