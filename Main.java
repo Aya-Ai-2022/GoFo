@@ -113,7 +113,7 @@ public class Main {
                 System.out.println("1-show all.\n2- filter by.\nenter : ");
                 input = reader.readLine();
                 if (input.equals("1")) {
-                    valid = admin.getAll();
+                    valid = admin.getAllPlayground();
                 } else if (input.equals("2")) {
                     while (true) {
                         System.out.println("filter by :\n1-location.\n2-price range.\n3-Time range.\n4-available hours.\nenter : ");

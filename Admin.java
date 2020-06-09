@@ -93,7 +93,7 @@ public class Admin {
         }
     }
 
-    public Vector<playground> getAll(){
+    public Vector<playground> getAllPlayground(){
         return playgrounds;
     }
 
