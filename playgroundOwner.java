@@ -105,11 +105,8 @@ public class playgroundOwner extends User {
                 System.out.println("Enter hour : ");
                 n = Integer.parseInt(reader.readLine());
                 t.setHour(n);
-<<<<<<< Updated upstream
+
                 e.addPlaygroundHours(t);
-=======
-                //e.addPlaygroundHours(t);
->>>>>>> Stashed changes
                 System.out.println("Great ! ,, playground hour added !");
 
             } else if (op == "4") {
@@ -147,8 +144,7 @@ public class playgroundOwner extends User {
             }
 
         }
-<<<<<<< Updated upstream
-=======
+
     }
 
     public void getPlaygrounds(){
@@ -162,7 +158,7 @@ public class playgroundOwner extends User {
 
     public void checkEwallet(){
         System.out.println("your balance = "+getEwalletBalance());
->>>>>>> Stashed changes
+
     }
 
     public void getpaid(double amount){

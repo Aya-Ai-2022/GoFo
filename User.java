@@ -142,22 +142,13 @@ public class User {
                 System.exit(0);
             }
         };
-<<<<<<< Updated upstream
 
             timer.schedule(exitApp, new Date(System.currentTimeMillis()+30*1000));
 
 */
+
         int randomNum = ThreadLocalRandom.current().nextInt(1111, 9998 + 1);
         String message = ". we are happy to have you in our application!.\nhere's your code : "+randomNum;
-        Main.sendEmail(e,n,"we are GOFO team" , message);
-=======
-
-            timer.schedule(exitApp, new Date(System.currentTimeMillis()+30*1000));
-
-*/
-        int randomNum = ThreadLocalRandom.current().nextInt(1111, 9998 + 1);
-        String message = ". we are happy to have you in our application!.\nhere's your code : "+randomNum;
->>>>>>> Stashed changes
         System.out.println("\n\n\n\nEnter verification code to continue : ");
         Main.sendEmail(e,n,"we are GOFO team" , message);
         Main.input = Main.reader.readLine();
