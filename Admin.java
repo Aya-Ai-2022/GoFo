@@ -3,10 +3,7 @@
 import java.io.IOException;
 import java.util.Vector;
 
-/**
- * @author ayasa
- *
- */
+
 public class Admin {
     private Vector<player> players = new Vector<player>();
     private Vector<playgroundOwner> playgroundOwner = new Vector<playgroundOwner>();
@@ -35,12 +32,13 @@ public class Admin {
         else return false;
     }
 
-    public void requestApproval(playground e) {
+    public void requestApproval(playground e ) {
         toApprove.add(e);
     }
 
     public void approvePlayground(int index) {
         playgrounds.add(toApprove.get(index));
+        toApprove.get(index).getOwner().addApprovedPlayground(toApprove.get(index));
         toApprove.remove(index);
     }
 
@@ -139,7 +137,11 @@ public class Admin {
         Vector<playground> valid = new Vector<>();
         for (playground o : playgrounds) {
             for(hour h : o.getPlaygroundHours()) {
+<<<<<<< Updated upstream
                 if (h.getHour() >= min || h.getHour() <= max)
+=======
+                if (h.getHour() >= min && h.getHour() <= max)
+>>>>>>> Stashed changes
                     valid.add(o);
             }
         }
@@ -152,7 +154,11 @@ public class Admin {
         Vector<playground> valid = new Vector<>();
         for (playground o : playgrounds) {
 
+<<<<<<< Updated upstream
                 if (o.getPricePerHour()>=min||o.getPricePerHour()<=max)
+=======
+                if (o.getPricePerHour()>=min&&o.getPricePerHour()<=max)
+>>>>>>> Stashed changes
                     valid.add(o);
         }
         return valid;

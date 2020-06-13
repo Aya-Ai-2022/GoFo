@@ -1,6 +1,6 @@
 public class hour {
-    int hour ;
-    boolean available;
+    private int hour ;
+    private boolean available;
 
     public hour(){
         hour=0;
@@ -26,6 +26,6 @@ public class hour {
 
     public String toString() {
         return String.format(
-                "hours : " + hour );
+                "hour : " + hour );
     }
 }

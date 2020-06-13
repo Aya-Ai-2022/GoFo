@@ -1,12 +1,12 @@
 import java.util.Vector;
 
 public class playground {
-    String playgroundName , playgroundArea ,Owner ;
-    double playgroundSize , pricePerHour , cancellationPeriod;
-    boolean status;
-    int playgroundID ,ownerID;
-    Vector<hour> playgroundHours = new Vector<hour>();
-   // Vector<time> playgroundDate = new Vector<time>();
+    private String playgroundName , playgroundArea;
+    private playgroundOwner owner;
+    private double playgroundSize , pricePerHour , cancellationPeriod;
+    private boolean status;
+    private int playgroundID ,ownerID;
+    private Vector<hour> playgroundHours = new Vector<hour>();
 
 
     public playground(){
@@ -30,10 +30,6 @@ public class playground {
         return pricePerHour;
     }
 
-    public String getPlaygroundOwner() {
-        return Owner;
-    }
-
     public String getPlaygroundArea() {
         return playgroundArea;
     }
@@ -52,10 +48,6 @@ public class playground {
 
     public void setStatus(boolean status) {
         this.status = status;
-    }
-
-    public void setPlaygroundOwner(String playgroundOwner) {
-        this.Owner = playgroundOwner;
     }
 
     public void setCancellationPeriod(double cancellationPeriod) {
@@ -78,6 +70,10 @@ public class playground {
         playgroundHours.add(e);
     }
 
+    public void setPlaygroundHours(Vector<hour> playgroundHours) {
+        this.playgroundHours = playgroundHours;
+    }
+
     public int getOwnerID() {
         return ownerID;
     }
@@ -86,9 +82,6 @@ public class playground {
         this.playgroundSize = playgroundSize;
     }
 
-    public String getOwner() {
-        return Owner;
-    }
 
     public void setOwnerID(int ownerID) {
         this.ownerID = ownerID;
@@ -98,15 +91,16 @@ public class playground {
         return playgroundID;
     }
 
-    public void setOwner(String owner) {
-        Owner = owner;
-    }
 
     public void getHour() {
         int counter=1;
         for (hour h : playgroundHours) {
            if (h.isAvailable())
+<<<<<<< Updated upstream
                System.out.println(counter + "-" + h);
+=======
+               System.out.println(counter + "--" + h);
+>>>>>>> Stashed changes
            else{
                System.out.println(counter + "-" + h+"\tNOT AVAILABLE");
            }
@@ -136,7 +130,7 @@ public class playground {
         return String.format(
                 "playground Name='" + playgroundName + '\'' +
                 ", playground Area='" + playgroundArea + '\'' +
-                ", Owner='" + Owner + '\'' +
+                ", Owner='" + owner + '\'' +
                 ", playground Size=" + playgroundSize +
                 ", pricePerHour=" + pricePerHour +
                 ", cancellation Period=" + cancellationPeriod +
@@ -144,5 +138,13 @@ public class playground {
                 ", playground ID=" + playgroundID +
                 ", owner ID=" + ownerID +
                 '}');
+    }
+
+    public void setOwner(playgroundOwner owner) {
+        this.owner = owner;
+    }
+
+    public playgroundOwner getOwner() {
+        return owner;
     }
 }

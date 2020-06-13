@@ -27,8 +27,16 @@ public class Main {
 
 
     public static void main(String[] args) throws IOException {
+playgroundOwner a = new playgroundOwner();
+a.setUserName("h");
+a.setPassword("h");
+admin.addPlaygroundOwner(a);
 
+<<<<<<< Updated upstream
         while (true) {
+=======
+       while (true) {
+>>>>>>> Stashed changes
             System.out.println("\n-----HELLO !! , let's GO FOOTBALL!-----\n");
             System.out.println("\n1-LOGIN.\n2-Sign up.\n3-Exit\nYour Choice : ");
             input = reader.readLine();
@@ -105,8 +113,14 @@ public class Main {
 
 
     static void playerMenu(player p) throws IOException {
+<<<<<<< Updated upstream
         while (true) {
             System.out.println("Choose action :\n1-Show available playgrounds.\n2-add teammate to your team.\n3-remove member from your team.\n4-logout\nenter : ");
+=======
+
+        while (true) {
+            System.out.println("Choose action :\n1-Show available playgrounds.\n2-add teammate to your team.\n3-remove member from your team.\n4-show booked hours.\n5-logout\nenter : ");
+>>>>>>> Stashed changes
             input = reader.readLine();
             Vector<playground> valid = new Vector<playground>();
             if (input.equals("1")) {
@@ -150,9 +164,62 @@ public class Main {
                     }
 
 
+<<<<<<< Updated upstream
 
                 }
 
+
+
+
+                if (!valid.isEmpty()) {
+                    int counter = 0;
+                    //displaying all pgs
+                    for (playground pg : valid) {
+                        counter++;
+                        System.out.println(counter + "-" + pg);
+                    }
+=======
+>>>>>>> Stashed changes
+
+                    //choosing one
+                    System.out.println("choose playground  : ");
+                    int indexP = Integer.parseInt(reader.readLine()) - 1;
+                    while (indexP > valid.size()||indexP<0) {
+                        System.out.println("Wrong input..Choose again.");
+                        indexP = Integer.parseInt(reader.readLine()) - 1;
+                    }
+
+                    valid.get(indexP).getHour();
+                    System.out.println("choose hour  : ");
+                    int indexH = Integer.parseInt(reader.readLine()) - 1;
+
+                    while (indexH > valid.get(indexP).getPlaygroundHours().size()) {
+                        System.out.println("Wrong input..Choose again.");
+                        indexH = Integer.parseInt(reader.readLine()) - 1;
+                    }
+
+                    while (!valid.get(indexP).getPlaygroundHours().get(indexH).isAvailable()) {
+                        System.out.println("This hour is already booked.\nchoose again : ");
+                        indexH = Integer.parseInt(reader.readLine()) - 1;
+                    }
+
+
+                    valid.get(indexP).book(indexH);
+                    p.bookPlayground(valid.get(indexP), valid.get(indexP).getPlaygroundHours().get(indexH));
+
+                    for(playgroundOwner o : admin.getPlaygroundOwner()){
+                        if(valid.get(indexP).getOwnerID()==o.getID())
+                            o.getpaid(valid.get(indexP).getPricePerHour());
+
+                    }
+
+                    System.out.println("Playground booked successfully.");
+                } else {
+                    System.out.println("There's no playgrounds !");
+                }
+
+<<<<<<< Updated upstream
+=======
 
 
 
@@ -201,6 +268,7 @@ public class Main {
                     System.out.println("There's no playgrounds !");
                 }
 
+>>>>>>> Stashed changes
             }
 
 
@@ -229,7 +297,15 @@ public class Main {
                     int index = Integer.parseInt(input) - 1;
                     p.modifyTeam(index);
                     System.out.println("\nRemoved successfully!!");
+<<<<<<< Updated upstream
                 } else if (input.equals("4")) break;
+=======
+                } else if (input.equals("4"))
+                    {
+             p.viewPlayingHours();
+                        }
+                else if(input.equals("5")) break;
+>>>>>>> Stashed changes
                 else System.out.println("!!--Wrong input.");
             }
 
@@ -238,7 +314,7 @@ public class Main {
 
     static void ownerMenu(playgroundOwner o) throws IOException {
         while (true) {
-            System.out.println("Choose action :\n1-Add playground\n2-Create profile\n3-logout");
+            System.out.println("Choose action :\n1-Add playground\n2-Create profile\n3-show my playgrounds.\n4-logout");
             input = reader.readLine();
             if(input.equals("1")){
                 o.addPlayground();
@@ -249,7 +325,10 @@ public class Main {
                 System.out.println("\nGREAT!! .. profile created successfully.");
 
             }
-            else if(input.equals("3")) break;
+            else if(input.equals("3")){
+                o.getPlaygrounds();
+            }
+            else if(input.equals("4")) break;
            else System.out.println("!!--Wrong input.");
 
 
@@ -267,7 +346,7 @@ public class Main {
                 input=reader.readLine();
                 int index = Integer.parseInt(input)-1;
                 admin.approvePlayground(index);
-                System.out.println("\nRemoved successfully!!");
+                System.out.println("\nApproved successfully!!");
 
             }
             else if(input.equals("2")) break;
@@ -291,8 +370,13 @@ public class Main {
                 props.put("mail.smtp.auth", "true");
                 props.put("mail.store.protocol", "pop3");
                 props.put("mail.transport.protocol", "smtp");
+<<<<<<< Updated upstream
                 final String username = "xxxxx@gmail.com";
                 final String password = "xxxxxx";
+=======
+                final String username = "samareeyassin155@gmail.com";
+                final String password = "gbvdzjjokeqmitqf";
+>>>>>>> Stashed changes
                 try {
                     Session session = Session.getDefaultInstance(props,
                             new Authenticator() {
@@ -305,7 +389,11 @@ public class Main {
                     Message msg = new MimeMessage(session);
 
                     // -- Set the FROM and TO fields --
+<<<<<<< Updated upstream
                     msg.setFrom(new InternetAddress("xxxxx@gmail.com"));
+=======
+                    msg.setFrom(new InternetAddress("samareeyassin155@gmail.com"));
+>>>>>>> Stashed changes
                     msg.setRecipients(Message.RecipientType.TO,
                             InternetAddress.parse(email, false));
                     msg.setSubject("GOFO APP");

@@ -8,4 +8,12 @@ public class team {
         this.email = email;
         this.name =name;
     }
+
+    @Override
+    public String toString() {
+        return "team{" +
+                "email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

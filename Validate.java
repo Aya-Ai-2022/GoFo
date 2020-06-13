@@ -9,7 +9,6 @@ public final class Validate {
      * Returns true if a valid username is input.
      *
      */
-    public static User user;
 
     public static boolean username(String input) {
         if (!input.isEmpty() && !input.contains(" ") && input.matches("[a-zA-Z]+[a-zA-Z0-9]+")) {
@@ -86,14 +85,6 @@ public final class Validate {
         return false;
     }
 
-
-    public String getError() {
-        return error;
-    }
-
-    public static void setError(String errr) {
-        error = errr;
-    }
 
 
 }

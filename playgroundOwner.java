@@ -6,8 +6,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 
 public class playgroundOwner extends User {
-    int EwalletBalance;
-    String address,phone;
+    private int EwalletBalance;
+    private String address,phone;
+    private Vector<playground> playgrounds = new Vector<playground>();
 
     public playgroundOwner(){
         super();
@@ -20,24 +21,24 @@ public class playgroundOwner extends User {
         public void addPlayground() throws IOException {
 
         playground e=new playground();
-        hour h = new hour();
         System.out.println("Enter playground name : ");
         Main.input = Main.reader.readLine();
         e.setPlaygroundName(Main.input);
         System.out.println("Enter price per hour : ");
         double n = Double.parseDouble(Main.reader.readLine());
         e.setPricePerHour(n);
-
-        System.out.println("Enter available hour(Hour must be in range 1pm-12pm) : ");
+            hour h1 = new hour();
+            System.out.println("Enter available hour(Hour must be in range 1pm-12pm) : ");
         int t = Integer.parseInt(Main.reader.readLine());
         if(t>12||t<1) System.out.println("!!--Hour must be in range 1pm-12pm");
-
-        else{h.setHour(t);
-            e.addPlaygroundHours(h);}
+        else{h1.setHour(t);
+            e.addPlaygroundHours(h1);}
         while(true){
+            hour h = new hour();
             System.out.println("add another hour? (y/n) : ");
             Main.input=Main.reader.readLine();
             if(Main.input.equalsIgnoreCase("y")) {
+                System.out.println("Enter available hour(Hour must be in range 1pm-12pm) : ");
                 t = Integer.parseInt(Main.reader.readLine());
                 if(t>12||t<1) System.out.println("!!--Hour must be in range 1pm-12pm");
                 else {h.setHour(t);
@@ -56,7 +57,7 @@ public class playgroundOwner extends User {
         Main.input = Main.reader.readLine();
         e.setPlaygroundArea(Main.input);
 
-        e.setPlaygroundOwner(this.getName());
+        e.setOwner(this);
         e.setOwnerID(this.getID());
 
         Main.admin.requestApproval(e); //asking admin to approve the playground
@@ -70,21 +71,11 @@ public class playgroundOwner extends User {
         Main.input = Main.reader.readLine();
         this.setPhone(Main.input);
 
-        int randomNum = ThreadLocalRandom.current().nextInt(1111, 9998 + 1);
 
-        //Main.sendSMS();
-        System.out.println("\n\n\n\nEnter verification code to continue : ");
-        Main.input = Main.reader.readLine();
-        String code = Main.input;
+    }
 
-        while(!code.equals(String.valueOf(randomNum))) {
-            System.out.println("\n--Sorry code is wrong!");
-            System.out.println("\nEnter verification code to continue : ");
-            Main.input = Main.reader.readLine();
-            code = Main.input;
-        }
-
-
+    public void  addApprovedPlayground(playground e){
+        playgrounds.add(e);
     }
 
     public void updatePlayground(playground e) throws IOException {
@@ -114,7 +105,11 @@ public class playgroundOwner extends User {
                 System.out.println("Enter hour : ");
                 n = Integer.parseInt(reader.readLine());
                 t.setHour(n);
+<<<<<<< Updated upstream
                 e.addPlaygroundHours(t);
+=======
+                //e.addPlaygroundHours(t);
+>>>>>>> Stashed changes
                 System.out.println("Great ! ,, playground hour added !");
 
             } else if (op == "4") {
@@ -152,6 +147,22 @@ public class playgroundOwner extends User {
             }
 
         }
+<<<<<<< Updated upstream
+=======
+    }
+
+    public void getPlaygrounds(){
+        int counter = 0;
+        for (playground p : playgrounds) {
+            counter++;
+            System.out.println(counter + "-" + p);
+
+        }
+    }
+
+    public void checkEwallet(){
+        System.out.println("your balance = "+getEwalletBalance());
+>>>>>>> Stashed changes
     }
 
     public void getpaid(double amount){

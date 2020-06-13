@@ -1,3 +1,4 @@
+import java.awt.print.Book;
 import java.util.Vector;
 
 class player extends User {
@@ -38,6 +39,13 @@ class player extends User {
         for(team t : teamPlayers){
             counter++;
             System.out.println(counter+"-" +t);
+        }
+    }
+    public void viewPlayingHours(){
+        int counter=1;
+        for(int i =0 ; i<bookings.size();i++){
+            System.out.println(counter+"-" +bookings.get(i).getHourBooked());
+            counter++;
         }
     }
 
