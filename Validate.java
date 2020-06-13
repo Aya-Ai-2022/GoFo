@@ -1,3 +1,10 @@
+/**
+ * This class check for some conditions which should be available in the date entered during registering
+ * like the email which should be valid and we check for that by a code which is sent to the email entered
+ * then we ask for that code to make the user continue in the system
+ * also it check for password which should be strong with at least 8 digits and a uppercase character.
+ */
+
 public final class Validate {
 
 

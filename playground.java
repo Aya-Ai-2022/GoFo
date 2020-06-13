@@ -1,5 +1,8 @@
 import java.util.Vector;
 
+/**
+ * This class enables the owner to add a new valid hour or change the statue of this hour so it could be booked later.
+ */
 public class playground {
     private String playgroundName , playgroundArea;
     private playgroundOwner owner;
@@ -9,6 +12,9 @@ public class playground {
     private Vector<hour> playgroundHours = new Vector<hour>();
 
 
+    /**
+     * playground constructor
+     */
     public playground(){
         playgroundName="";
         playgroundArea ="";
@@ -66,6 +72,10 @@ public class playground {
         this.pricePerHour = pricePerHour;
     }
 
+    /**
+     * add hour to the playground
+     * @param e hour to add
+     */
     public void addPlaygroundHours(hour e) {
         playgroundHours.add(e);
     }
@@ -78,26 +88,41 @@ public class playground {
         return ownerID;
     }
 
+    /**
+     * set playground size
+     * @param playgroundSize size
+     */
+
     public void setPlaygroundSize(double playgroundSize) {
         this.playgroundSize = playgroundSize;
     }
 
+    /**
+     * set owner id
+     * @param ownerID owner id
+     */
 
     public void setOwnerID(int ownerID) {
         this.ownerID = ownerID;
     }
 
+    /**
+     * get id of the playground
+     * @return id
+     */
+
     public int getPlaygroundID() {
         return playgroundID;
     }
 
-
+    /**
+     * get hours of the playground
+     */
     public void getHour() {
         int counter=1;
         for (hour h : playgroundHours) {
            if (h.isAvailable())
-               System.out.println(counter + "-" + h);
-
+               System.out.println(counter + "--" + h);
            else{
                System.out.println(counter + "-" + h+"\tNOT AVAILABLE");
            }
@@ -105,20 +130,24 @@ public class playground {
         }
     }
 
+    /**
+     * book an hour in the playground
+     * @param index index of the hour to book
+     */
     public  void book(int index){
         playgroundHours.get(index).setAvailable(false);
     }
 
+    /**
+     * check if there's available hours in the playground
+     * @return
+     */
 
     public boolean isAvailable(){
         for(hour h : playgroundHours){
             if(h.isAvailable()) return true;
         }
         return false;
-    }
-
-    public void addHour(hour h){
-        playgroundHours.add(h);
     }
 
 
@@ -137,9 +166,19 @@ public class playground {
                 '}');
     }
 
+    /**
+     * set owner of the playground
+     * @param owner owner
+     */
+
     public void setOwner(playgroundOwner owner) {
         this.owner = owner;
     }
+
+    /**
+     * get owner of the playground
+     * @return
+     */
 
     public playgroundOwner getOwner() {
         return owner;

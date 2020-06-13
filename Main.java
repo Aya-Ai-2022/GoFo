@@ -16,7 +16,10 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-
+/**
+ * This is the class handling the user interface with the system where the functions
+ * within the classes are called to perform their tasks.
+ */
 public class Main {
     public static Admin admin = new Admin();
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -28,6 +31,10 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
+        player h= new player();
+        h.setUserName("h");
+        h.setPassword("h");
+        admin.addPlayer(h);
 
         while (true) {
             System.out.println("\n-----HELLO !! , let's GO FOOTBALL!-----\n");
@@ -101,7 +108,11 @@ public class Main {
 
         }
 
-
+    /**
+     * player menu to appear after login
+     *@param p player to track his info.
+     * @throws IOException
+     */
     static void playerMenu(player p) throws IOException {
 
             while (true) {
@@ -283,6 +294,12 @@ public class Main {
 
     }
 
+    /**
+     * menu appear to the owner
+     * @param o owner to track his info.
+     * @throws IOException
+     */
+
 
     static void ownerMenu(playgroundOwner o) throws IOException {
         while (true) {
@@ -307,6 +324,11 @@ public class Main {
         }
     }
 
+    /**
+     * admin menu to appear
+     * @param a admin account
+     * @throws IOException
+     */
     static void adminMenu(Admin a) throws IOException {
         while(true){
             System.out.println("Choose action :\n1-show playgrounds to be approved\n2-logout");
@@ -329,7 +351,13 @@ public class Main {
 
     }
 
-
+    /**
+     * send emails
+     * @param email email to send to
+     * @param nameR receiver name
+     * @param nameS sender name
+     * @param message message to send
+     */
     static void sendEmail (String email ,String nameR , String nameS , String message){
         final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
         // Get a Properties object
@@ -343,8 +371,8 @@ public class Main {
         props.put("mail.store.protocol", "pop3");
         props.put("mail.transport.protocol", "smtp");
 
-        final String username = "xxxxx@gmail.com";
-        final String password = "xxxxxx";
+        final String username = "xxx@gmail.com";
+        final String password = "***";
 
         try {
             Session session = Session.getDefaultInstance(props,
@@ -358,7 +386,7 @@ public class Main {
             Message msg = new MimeMessage(session);
 
             // -- Set the FROM and TO fields --
-            msg.setFrom(new InternetAddress("xxxxx@gmail.com"));
+            msg.setFrom(new InternetAddress("xxx@gmail.com"));
 
             msg.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(email, false));

@@ -10,15 +10,22 @@ public class playgroundOwner extends User {
     private String address,phone;
     private Vector<playground> playgrounds = new Vector<playground>();
 
+    /**
+     * constructor
+     */
     public playgroundOwner(){
         super();
         setEwalletBalance(0);
         this.setID(Main.userID++);
     }
 
+    /**
+     * adding playground and request to verify it from admin
+     * @throws IOException
+     */
 
 
-        public void addPlayground() throws IOException {
+    public void addPlayground() throws IOException {
 
         playground e=new playground();
         System.out.println("Enter playground name : ");
@@ -63,6 +70,11 @@ public class playgroundOwner extends User {
         Main.admin.requestApproval(e); //asking admin to approve the playground
     }
 
+    /**
+     * create his profile with location and phone
+     * @throws IOException
+     */
+
     public void createProfile() throws IOException {
         System.out.println("Enter your Adress : ");
         Main.input = Main.reader.readLine();
@@ -74,9 +86,20 @@ public class playgroundOwner extends User {
 
     }
 
+    /**
+     * add appproved playground to his data
+     * @param e approved playground
+     */
+
     public void  addApprovedPlayground(playground e){
         playgrounds.add(e);
     }
+
+    /**
+     * update playground data
+     * @param e playground to update
+     * @throws IOException
+     */
 
     public void updatePlayground(playground e) throws IOException {
         String op;
@@ -105,8 +128,7 @@ public class playgroundOwner extends User {
                 System.out.println("Enter hour : ");
                 n = Integer.parseInt(reader.readLine());
                 t.setHour(n);
-
-                e.addPlaygroundHours(t);
+                //e.addPlaygroundHours(t);
                 System.out.println("Great ! ,, playground hour added !");
 
             } else if (op == "4") {
@@ -144,9 +166,12 @@ public class playgroundOwner extends User {
             }
 
         }
-
     }
 
+
+    /**
+     * getter for playground as list
+     */
     public void getPlaygrounds(){
         int counter = 0;
         for (playground p : playgrounds) {
@@ -156,37 +181,70 @@ public class playgroundOwner extends User {
         }
     }
 
+    /**
+     * check ewallet balance
+     */
+
     public void checkEwallet(){
         System.out.println("your balance = "+getEwalletBalance());
-
     }
 
+    /**
+     * player pay the playground booked price
+     * @param amount playground hour price
+     */
     public void getpaid(double amount){
         EwalletBalance+=amount;
     }
 
 
-
+    /**
+     * get balance
+     * @return ewallet balance
+     */
     public int getEwalletBalance() {
         return EwalletBalance;
     }
+
+    /**
+     * set balance
+     * @param ewalletBalance  balance to set
+     */
 
     public void setEwalletBalance(int ewalletBalance) {
         EwalletBalance = ewalletBalance;
     }
 
+    /**
+     * set address
+     * @param address addtess
+     */
+
     public void setAddress(String address) {
         this.address = address;
     }
+
+    /**
+     * get phone number
+     * @return phone
+     */
 
     public String getPhone() {
         return phone;
     }
 
+    /**
+     * set phone number
+     * @param phone phone number
+     */
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
+    /**
+     * get address
+     * @return
+     */
     public String getAddress() {
         return address;
     }
@@ -198,6 +256,12 @@ public class playgroundOwner extends User {
                 "email : "  +this.getEmail()
                 +"phone : " +this.getPhone();
     }
+
+    /**
+     * check if login credentials are right
+     * @param o owner to verify
+     * @return true if it's right credentials
+     */
 
     public boolean checkLogin(playgroundOwner o) {
         return this.getUserName().equals(o.getUserName())&&this.getPassword().equals(o.getPassword()) ;
