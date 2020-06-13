@@ -1,6 +1,5 @@
 public final class Validate {
 
-    private static String error;
 
     public Validate() {
     }
@@ -9,6 +8,7 @@ public final class Validate {
      * Returns true if a valid username is input.
      *
      */
+    public static User user;
 
     public static boolean username(String input) {
         if (!input.isEmpty() && !input.contains(" ") && input.matches("[a-zA-Z]+[a-zA-Z0-9]+")) {

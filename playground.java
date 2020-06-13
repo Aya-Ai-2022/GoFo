@@ -96,11 +96,8 @@ public class playground {
         int counter=1;
         for (hour h : playgroundHours) {
            if (h.isAvailable())
-<<<<<<< Updated upstream
                System.out.println(counter + "-" + h);
-=======
-               System.out.println(counter + "--" + h);
->>>>>>> Stashed changes
+
            else{
                System.out.println(counter + "-" + h+"\tNOT AVAILABLE");
            }

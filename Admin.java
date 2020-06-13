@@ -137,12 +137,7 @@ public class Admin {
         Vector<playground> valid = new Vector<>();
         for (playground o : playgrounds) {
             for(hour h : o.getPlaygroundHours()) {
-<<<<<<< Updated upstream
-                if (h.getHour() >= min || h.getHour() <= max)
-=======
-                if (h.getHour() >= min && h.getHour() <= max)
->>>>>>> Stashed changes
-                    valid.add(o);
+                if (h.getHour() >= min && h.getHour() <= max) valid.add(o);
             }
         }
         return valid;
@@ -154,11 +149,8 @@ public class Admin {
         Vector<playground> valid = new Vector<>();
         for (playground o : playgrounds) {
 
-<<<<<<< Updated upstream
-                if (o.getPricePerHour()>=min||o.getPricePerHour()<=max)
-=======
+
                 if (o.getPricePerHour()>=min&&o.getPricePerHour()<=max)
->>>>>>> Stashed changes
                     valid.add(o);
         }
         return valid;
